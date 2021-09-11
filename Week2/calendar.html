@@ -1,0 +1,135 @@
+<!-- Modify this page to use a select and an input to generate a calendar for any month and year -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Calendar</title>
+    </head>
+    <style>
+        .calendarWrapper {
+        border: silver 2px solid;
+        width: 525px;
+        margin: 0 auto;
+        }
+
+        .calendarTitle {
+        text-align: center;
+        padding: 5px;
+        font-weight: 700;
+        grid-column: span 7;
+        border: silver 1px solid;
+        }
+
+        .calendar {
+        display: grid;
+        grid-template-columns: 75px 75px 75px 75px 75px 75px 75px;
+        }
+
+        .calendarCell {
+        border: silver 1px solid;
+        text-align: center;
+        padding: 3px;
+        }
+
+        .blankDay {
+        border: silver 1px solid;
+        text-align: center;
+        padding: 3px;
+        background-color: silver;
+        }
+
+        .displayhide{
+            display: none;
+        }
+
+    </style>
+    <body>
+        <div class='calendarWrapper'>
+
+            <label id = 'LableMonths' for="SelectMonths">Choose a month:</label>
+            <select name="SelectMonths" id="SelectMonths">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+              <button id = "submit" type = "submit" onclick = "printCalendar()">Go</button>
+
+            <div class='calendarTitle'></div>
+
+            <div class='calendar' id='calendarDays'></div>
+        </div>
+    </body>
+    <script>
+// modify this script to populate the month select you create in the HTML page from an array of month names
+// you can use either a for loop or an array.map to populate the select. remember that while arrays start with 
+// zero, month numbers go from 1-12
+
+// modify this script to run a function called printCalendar() when the user clicks the "Go" button
+
+// modify this script to use the first day of the month the user selects in place of the const today
+
+function printCalendar()
+{
+    var inputLable = document.getElementById("LableMonths");
+    var input = document.getElementById("SelectMonths");
+    var submit = document.getElementById("submit");
+    console.log("input "+input);
+    console.log("Value "+input.value);
+    var today = new Date(input.value+`/1/2021`)
+    var month = today.getMonth()
+
+
+    let days
+    switch (month) {
+        case 1: days = 28
+            break;
+        case 3: days = 30
+            break;
+        case 5: days = 30
+            break;
+        case 9: days = 30
+            break;
+        case 10: days = 30
+            break;
+        default:
+            days = 31;
+    }
+        
+    let x
+    const weekday = today.getDay()
+    for (x = 0; x < weekday; x++){
+        document.getElementById('calendarDays').innerHTML += "<div class='blankDay'>&nbsp;</div>"
+    }
+
+    let dt = 0
+    do {
+        dt++
+        document.getElementById('calendarDays').innerHTML += `<div class='calendarCell'>${dt}</div`
+    } while ( dt < days)
+
+    const monthName = today.toLocaleDateString('default', {month:'long'})
+    const year = today.getFullYear()
+    document.querySelector('.calendarTitle').innerText = `${monthName} ${year}`
+
+    const remainder = (7 - ((x + dt) % 7))
+    let y = 0
+    while ( y < remainder) {
+        document.getElementById('calendarDays').innerHTML += "<div class='blankDay'>&nbsp;</div>"
+        y++
+    }
+
+    inputLable.setAttribute("class", "displayhide");
+    input.setAttribute("class", "displayhide");
+    submit.setAttribute("class", "displayhide");
+}
+</script>
+</html>
