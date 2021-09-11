@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Warehouse Ticket Generator</title>
+        <style>
+            .letterhead {
+            margin: 0 auto;
+            width: 800px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+            font-size: xx-large;
+            }
+
+            .slogan {
+            margin: 0 auto;
+            width: 800px;
+            text-align: center;
+            font-family: cursive;
+            font-size: small;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            margin-bottom: 20px;
+            }
+
+            .orderWrapper {
+            margin: 0 auto;
+            width: 800px;
+            display: grid;
+            grid-template-columns: 75% 22%;
+            column-gap: 25px;
+            row-gap: 10px;
+            }
+
+            .orderDetails {
+            grid-row: span 4;
+            border: 1px solid black;
+            border-radius: 8px;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: small;
+            }
+
+            .detailHeader {
+            text-align: center;
+            background-color: silver;
+            border-radius: 8px;
+            border-radius: 8px 8px 0px 0px;
+            }
+
+            .sidebar {
+            border: 1px solid black;
+            border-radius: 8px;
+            text-align: center;
+            background-color: silver;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-size: small;
+            padding: 4px;
+            }
+
+            .bottomBar {
+            font-weight: 700;
+            margin: 0 auto;
+            width: 800px;
+            margin-top: 20px;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class='letterhead'>Dingleschuss Supply</div>
+        <div class='slogan'>The Most Complete Brosperflach Supply Center in Valley since 1955</div>
+        <div class='orderWrapper'>
+            <div id='orderDetails' class='orderDetails'>
+                <div class='detailHeader'>Order Details</div>
+                <div id='detailsList' class='detailsList'></div>
+            </div>
+            <div id='specialPackaging' class='sidebar'>Packaging</div>
+
+            <div id='hazardousMaterials' class='sidebar'>Hazardous</div>
+
+            <div id='smallItemsOnly' class='sidebar'>Small Items</div>
+
+            <div id='forkiftNeeded' class='sidebar'>Forklift</div>
+
+        </div>
+        <div id='totalItems' class='bottomBar'>Total Items</div>
+
+    </body>
+
+    <script>
+        var parts = [ 
+        {partNbr: 'R5AQDVU', partDescr: 'Halbendozer', aisle: 'B3', qty: 14},
+        {partNbr: 'LJBKC0M', partDescr: 'Knudleknorp', aisle: 'H1', qty: 12},
+        {partNbr: 'HUS51DE', partDescr: 'Knudlescheiffer', aisle: 'H1', qty: 12},
+        {partNbr: 'M0XORFH', partDescr: 'Borgom Oil', aisle: 'B2', qty: 3},
+        {partNbr: '35X7AP8', partDescr: 'Glundelscharf', aisle: 'C3', qty: 1},
+        {partNbr: 'C1AYCAI', partDescr: 'Tschoffle', aisle: 'A4', qty: 5},
+        {partNbr: 'E9IEYLS', partDescr: 'Karmandloch', aisle: 'C2', qty: 2},
+        {partNbr: 'IW2I0TG', partDescr: 'Shreckendwammer', aisle: 'J4', qty: 2},
+        {partNbr: '95OJTV6', partDescr: 'Dimpenaus', aisle: 'B1', qty: 16},
+        {partNbr: 'LYII1MJ', partDescr: 'Lumpenknorp', aisle: 'H1', qty: 12},
+        {partNbr: 'VQIL7AO', partDescr: 'Lumpenschieffer', aisle: 'H1', qty: 12},
+        {partNbr: 'XF0MPS9', partDescr: 'Ratklampen', aisle: 'N2', qty: 7},
+        {partNbr: 'AFU9OUG', partDescr: 'Dulpo Fittings', aisle: 'J2', qty: 4},
+        {partNbr: 'E7XWGGO', partDescr: 'Flugtrimsammler', aisle: 'B3', qty:3 },
+        {partNbr: '981FNC9', partDescr: 'Grosstramle', aisle: 'A1', qty: 1},
+        {partNbr: 'AGSXYVZ', partDescr: 'Skirpenflatch', aisle: 'B2', qty: 2},
+        {partNbr: 'V0SK0UX', partDescr: 'Lumpenmagler', aisle: 'H1', qty: 12},
+        {partNbr: 'CTL40Z1', partDescr: 'Lumpenflempest', aisle: 'H1', qty: 24},
+        {partNbr: 'POO9ZPM', partDescr: 'Eumonklippen', aisle: 'D2', qty: 7},
+        {partNbr: 'WEYPU3Z', partDescr: 'Mumpenflipper', aisle: 'E3', qty: 1}
+
+    ]
+
+    // list of each part number and qty for check-off in the "detailsList" element
+
+    // if parts requiring special handling exist (in aisle B3), list of items needing 
+    // special packaging in the "specialPackaging" element, else remove element
+
+    // if hazardous parts exist (in aisle J4), let employee know in the "hazardousMaterials"
+    // element and remind them to get gloves, else remove element
+
+    // if all items in the order are small parts (aisle H1), then let employee know that they should take 
+    // a basket and go dirctly to aisle H1
+
+    // if there are large items (anthing in aisles S, T, or U), then let the employee know in the "forkiftNeeded"
+    // element that they will need to reserve a forklift, else remove the element
+
+    // sum up the total number of parts and append that number to the text already in "totalItems" element
+
+    
+    const Details = document.getElementById('orderDetails');
+    const Packing = document.getElementById('specialPackaging');
+    const Hazard = document.getElementById('hazardousMaterials');
+    const Small = document.getElementById('smallItemsOnly');
+    const Forklift = document.getElementById('forkiftNeeded');
+    var i = 0;
+    var Total = 0;
+
+    while(i <= parts.length)
+    {
+        var Item = parts[i];
+        var iP = document.createElement("P"); // Make the Group
+        var iItem = document.createElement("input"); // Add a checkbox
+        var iLabel = document.createElement("label"); // Add Lable
+
+        iP.id = 'p_'+Item.partNbr; // Make item id 'p_'+ part number
+        iP.name = 'p_'+Item.partDescr; // Make item id 'p_'+ part number
+
+        iItem.type = "checkbox"; // Make checkbox
+        iItem.id = 'c_'+Item.partNbr; // Make checkbox id 'p_'+ part number
+        iItem.name = 'c_'+Item.partDescr; // Make checkbox name 'p_'+ part number
+        iItem.textContent = Item.partDescr; // Make checkbox text 'p_'+ part number
+
+
+//        iLabel.type = "label"; // make lable
+        iLabel.id = 'l_'+Item.partNbr; // Make lable id 'p_'+ part number
+        iLabel.name = 'l_'+Item.partDescr; // Make lable name 'p_'+ part number
+        iLabel.textContent = `${Item.qty} ${Item.partDescr} (Aisle ${Item.aisle})`; // Make lable text 'p_'+ part number
+
+        Details.appendChild(iP);
+        iP.appendChild(iItem);
+        iP.appendChild(iLabel);
+
+        var sAisle = Item.aisle;
+        var sString = sAisle.slice(0, 1);
+
+        if(sString == 'B')
+        {
+            iP = document.createElement("P"); // Make the Group
+            iP.id = 'sh_'+Item.partNbr; // Make item id 'sh_'+ part number
+            iP.name = 'sh_'+Item.partDescr; // Make item id 'sh_'+ part number
+            iP.textContent = `Item: ${Item.partNbr} / ${Item.qty}`
+            Packing.appendChild(iP);
+        }
+        if(sString == 'J')
+        {
+            iP = document.createElement("P"); // Make the Group
+            iP.id = 'pk_'+Item.partNbr; // Make item id 'sh_'+ part number
+            iP.name = 'pk_'+Item.partDescr; // Make item id 'sh_'+ part number
+            iP.textContent = `Item: ${Item.partNbr} / ${Item.qty}`
+            Hazard.appendChild(iP);
+        }
+        if(sString == 'J')
+        {
+            iP = document.createElement("P"); // Make the Group
+            iP.id = 'sh_'+Item.partNbr; // Make item id 'sh_'+ part number
+            iP.name = 'sh_'+Item.partDescr; // Make item id 'sh_'+ part number
+            iP.textContent = `Item: ${Item.partNbr} / ${Item.qty}`
+            Small.appendChild(iP);
+        }       
+        if(sString == 'S' || sString == 'T' || sString == 'U') 
+        {
+            iP = document.createElement("P"); // Make the Group
+            iP.id = 'sh_'+Item.partNbr; // Make item id 'sh_'+ part number
+            iP.name = 'sh_'+Item.partDescr; // Make item id 'sh_'+ part number
+            iP.textContent = `Item: ${Item.partNbr} / ${Item.qty}`
+            Forklift.appendChild(iP);
+        }
+        Total += Item.qty
+        console.log("check1")
+        i++
+    }
+    console.log("check2")
+    const eTotal = document.getElementById('totalItems');
+    eTotal.textContent = `Total Items: ${parts.length}`;
+
+    </script>
+</html>
