@@ -50,9 +50,9 @@ input {
     <body>
         <p style='text-align:center;'>Please fill in all the programming languages you know</p>
         <div class='wrapper'>
-            <input id='lang0' value="JSON"/> <input id='lang1' />
-            <input id='lang2' /> <input id='lang3' />
-            <input id='lang4' /> <input id='lang5' />
+            <input id='lang0' value="JSON"/> <input id='lang1' value="html"/>
+            <input id='lang2' value="Lua"/> <input id='lang3' value="Papyrus"/>
+            <input id='lang4' value="Aurora Script"/> <input id='lang5'/>
             <input id='lang6' /> <input id='lang7' />
             <div class='spanner' style="text-align: right; padding: 10px;">
                 <button id='submit' onclick="chkLang(
@@ -80,30 +80,25 @@ const lang = 'JavaScript'
 
 function Funkatronic()
 {
-    var eArray;
-    var lang0 = document.getElementById("lang0").value;
-    console.log(`Log ${lang0}`);
-    eArray.push(String(lang0));
-    var lang1 = document.getElementById("lang1").value;
-    eArray.push(lang1);
-    var lang2 = document.getElementById("lang2").value;
-    eArray.push(lang2);
-    var lang3 = document.getElementById("lang3").value;
-    eArray.push(lang3);
-    var lang4 = document.getElementById("lang4").value;
-    eArray.push(lang4);
-    var lang5 = document.getElementById("lang5").value;
-    eArray.push(lang5);
-    var lang6 = document.getElementById("lang6").value;
-    eArray.push(lang6);
-    var lang7 = document.getElementById("lang7").value;
-    eArray.push(lang7);
+    var eArray = [];
+    eArray[0] = document.getElementById("lang0").value;
+    eArray[1] = document.getElementById("lang1").value;
+    eArray[2] = document.getElementById("lang2").value;
+    eArray[3] = document.getElementById("lang3").value;
+    eArray[4] = document.getElementById("lang4").value;
+    eArray[5] = document.getElementById("lang5").value;
+    eArray[6] = document.getElementById("lang6").value;
+    eArray[7] = document.getElementById("lang7").value;
     
-    consol.log(eArray);
     return eArray;
 }
 function chkLang(langs) {
     let result = false
+
+    var array = Funkatronic();
+
+    if(array.includes(lang) || array.includes("Javascript") || array.includes("javaScript") || array.includes("javascript")) // if you know JavaScript
+    {result = true;}
 
     // use an array method to check whether the user included 'JavaScript' in their
     // list of languages
@@ -116,6 +111,6 @@ function chkLang(langs) {
 }
 
 
-Funkatronic();
+//Funkatronic();
     </script>
 </html>
