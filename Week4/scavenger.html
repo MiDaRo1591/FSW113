@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <link rel='stylesheet' href='scavenger.css'> -->
+        <style>
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.intro {
+  width: 300px;
+  margin: 0 auto;
+}
+.wrapper {
+  border: black 2px solid;
+  border-radius: 8px;
+  padding: 5px;
+  width: 300px;
+  display: grid;
+  grid-template-columns: 150px 150px;
+  margin: 0 auto;
+}
+
+.spanner {
+  padding: 5px;
+  font-weight: 700;
+  grid-column: span 2;
+  text-align: right;
+  padding: 10px;
+}
+
+.text {
+  border-radius: 4px;
+  background-color: silver;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 25px;
+}
+input {
+  width: 90%;
+  margin-bottom: 2px;
+}
+
+
+        </style>
+    </head>
+    <body>
+        <div class='intro'>
+            <p>Please fill in what each person collected in the office scavanger hunt. Separate each item with a comma.</p>
+            <p style='text-align: center;'>Items to collect
+                <ul id='lstItems'>
+                    <li>Wired Mouse</li>
+                    <li>Clacky Keyboard</li>
+                    <li>Post-its</li>
+                    <li>Gum Package</li>
+                    <li>Paper Clip</li>
+                    <li>Cell Phone Charger</li>
+                    <li>Coffee Cup</li>
+                    <li>USB Plug</li>
+                    <li>Family Picture</li>
+                    <li>ToDo List</li>
+                </ul>
+            </p>
+        </div>
+        <div class='wrapper'>
+            <div>Raji</div>
+            <div><textarea onclick=setTarget(this) style='width:90%' id='scavenger-0'>Wired Mouse</textarea></div>
+            <div>Huang</div>
+            <div><textarea onclick=setTarget(this) style='width:90%' id='scavenger-1'>Clacky Keyboard, Gum Package</textarea></div>
+            <div>José</div>
+            <div><textarea onclick=setTarget(this) style='width:90%' id='scavenger-2'>Wired Mouse</textarea></div>
+            <div>Veronica</div>
+            <div><textarea onclick=setTarget(this) style='width:90%' id='scavenger-3'>'USB Plug, Cell Phone Charger</textarea></div>
+            <div class='spanner' style="text-align: right; padding: 10px;">
+                <button id='submit' onclick = "combineLists()">Submit</button>
+                
+            </div>
+        </div>
+        <div id='AllItems' class='text'></div>
+    </body>
+    <!-- <script src='scavenger.js'></script> -->
+    <script>
+
+// Create an event listenter for the 'submit' button that calls the combineLists() function
+
+// Modify the combineLists() function to create arrays from each scavenger hunt element in the scavenger.html document. 
+// Then use the spread operator to combine these arrays into a single array. 
+// Sort that array and display it in the 'AllItems' element on the scavenger.html document.
+
+function combineLists() {
+    console.log(`Checking...`)// Just for visuals
+    var arrayTotal = // List of all items.
+    ['Clacky Keyboard','Post-its','Gum Package','Paper Clip','Cell Phone Charger','Coffee Cup','USB Plug','Family Picture','ToDo List']
+    var eArray = []; // List of found items, to be appended
+    var sList0 = document.getElementById("scavenger-0").value; // What Raji found
+    var sList1 = document.getElementById("scavenger-1").value; // What Huang found
+    var sList2 = document.getElementById("scavenger-2").value; // What José found
+    var sList3 = document.getElementById("scavenger-3").value; // What Veronica found
+    var sTotal = sList0+sList1+sList2+sList3; // All all found items to a string
+
+    console.log(`Raji: ${sList0}`); // List what Raji found
+    console.log(`Huang: ${sList1}`); // List what Huang found
+    console.log(`José: ${sList2}`); // List what José found
+    console.log(`Veronica: ${sList3}`); // List what Veronica found
+    console.log(`Filtering...`) // Just for visuals
+
+    for (i=0; i < arrayTotal.length; i++) // Cycal arrayTotal
+    {
+        if(sTotal.includes(arrayTotal[i]) ) // Check if sTotal is in arrayTotal
+        {
+            eArray[i] = arrayTotal[i]; // Mark arrayTotal's current object into eArray
+            console.log(`${arrayTotal[i]}: found`); // Just for visuals
+        }
+        else
+        {
+            eArray[i] = `N/A`
+            console.log(`${arrayTotal[i]}: not found`); // Just for visuals
+        }
+    }
+    console.log(`Total List: ${eArray}`); // Just for visuals
+    document.getElementById("AllItems").textContent = eArray; // Update with all found items.
+}
+
+// The following code is a bonus addition that facilitates data entry on the scavenger.html document.
+// If you first click in one of the textareas, you can then click scavenger hunt items in the unordered
+// list. The value of that will be added to the appropriate textarea along with any necessary commas.
+
+let objTargetText 
+const objUL = document.querySelector('#lstItems')
+
+objUL.onclick = function(event) {
+    var source = getEventTarget(event)
+    if (!objTargetText.innerHTML)
+        objTargetText.innerHTML = source.innerHTML
+    else
+        objTargetText.innerHTML += ',' + source.innerHTML
+}
+
+function getEventTarget(e) {
+    e = e || window.event
+    return e.target || e.srcElement
+}
+
+function setTarget(obj) {
+    objTargetText = obj
+}
+
+    </script>
+</html>
