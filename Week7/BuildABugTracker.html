@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<!-- 
+https://www.w3schools.com/tags/default.asp
+-->
+<html lang="en-us">
+    <head>
+        <title>Build A Bug Tracker</title>
+        
+    <!--    <link href = "styles.css" rel = "stylesheet"/> <!-- Link Style Sheet -->
+    </head>
+    <style>
+        .Notes
+        {
+            height: 300px;
+            width: 190px;
+            float: left;
+            border-style: solid;
+            border-color: black;
+            border-width: 2px;
+            padding: 5px;
+            margin: 5px;
+        }
+        .footnotepage
+        {
+            width: 300px;
+            font-size: 10px;
+            /*font-family: 'Apple', cursive;*/
+            background-color: lightgrey;
+            padding: 10px;
+        }  
+        .ListBackground
+        {
+            background-image:url("https://images.unsplash.com/photo-1586075010923-2dd4570fb338?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80");
+            height: 300px;
+            width: 190px;
+        }
+        .ListName
+        {
+            background-color: rgba(255, 255, 255, 0);
+        }
+        .ListDescription
+        {
+            height: 225px;
+            width: 185px;
+            background-color: rgba(255, 255, 255, 0);
+        }
+        
+        /* Styles can be added here.*/
+        @media only screen and (max-width: 767px) /* Phone */
+        {
+            .Notes
+            {
+            border-style: solid;
+            border-color: black;
+            border-width: 2px;
+            padding: 5px;
+            margin: 5px;
+            }
+        }
+        @media only screen and (min-width: 768px) and (max-width: 1365px) /* Tablet */
+        {}
+        @media only screen and (min-width: 1366px) and (max-width: 1919px) /* Computer */
+        {
+            .footnotepage
+            {
+            text-align: center;
+            align-content: center;
+            margin: 0 auto;
+            }
+        }
+        @media only screen and (max-width: 1920px) /* High Res*/
+        {}
+    </style>
+    <body>
+        <h1>Build A Todo List</h1>
+
+        <button id='fetchButton' onclick="fetchData()">Fetch Data</button>
+        <div id = "Comments"></div>
+        <!--
+        <div id = "TaskPaper" 
+        class = "ListBackground">
+
+        <input id = "TaskName" 
+        class = "ListName"
+            type = "text" 
+            placeholder = "Title"
+            value = "Micah">
+
+        <textarea id = "TaskDescription"
+            class = "ListDescription"
+            value = "Test Value"
+            ></textarea>
+
+        <button id = "TaskSubmit" 
+            type = "submit" 
+            onclick = "fPost()"
+            >Submit</button>
+
+        <input type = "checkbox" 
+            id = "TaskChecked" 
+            type = "checkbox"
+            
+            >
+            
+        </div>
+        <p></p>
+        <div id = "Comments"></div>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <!-- <script src = "JavaScript.js"></script> <!-- Link Javascript -->
+
+        <script>
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Open the data.js file and do the following:
+
+Call the "getSystems()" function in such a way that when the page loads, the "system" select element displays the three systems whose parentID is zero.
+The getSystems() function will accept two arguments (see week three): the parentID and the DOM element that will ultimately receive the data. Code this function as an asynchronous operation that will fetch data from the data.json file (see week three). After receiving the JSON data, the asynchronous promise should use a higher order array method (see week two) to return only those items from the JSON that have the matching parentID. That promise should then call a function that passes two parameters, this new array and the DOM element to the "populateDD" function (below).
+Note that although a number being passed as a parameter into a function may look like a numeral, it may be a string value  instead, and may need to be converted to an integer.
+The populateDD()  function receives the array and DOM element from the "getSystems()" function (above). This function should fill the appropriate DOM element with options from which the user can select. However, since that DOM element has an "onChange" event, this function first needs to add an option that says "Select an Item". Then use a looping mechanism (week one) to create the rest of  the select element's options using the sysName and sysID from the passed in array (see week five).
+This eventListener responds to a change to the "system" select element by passing the selected value from the "system" element to the "getSystems()" function along with the "subSystem" DOM element so that the second drop-down list is populated with the appropriate sub-systems from the data.json file.
+
+Open the bug.js file and do the following: 
+
+Create a variable of the right kind and in the right place such that each new bug that is added can increment that number.
+The constructor should be set up to accept the four user-input values from index.html: reportedBy, system, subSystem, and bugDesc
+The addBug() method should create a div element that displays the bug information input by the user within the "listWrapper" DOM element. It should also contain buttons whose onClick events will call the deleteBug() and resolveBug() methods (see below). 
+The deleteBug() method should remove the specified bug from the DOM (see week 2).
+The resolveBug() method should change the background for the appropriate bug to a darker color.
+The reportBug() method should instantiate the Bug class with the data input by the user in the index.html form. Then call the method to add the new bug report.
+
+Open the style.css file and do the following:
+
+Create all the style definitions necessary to make your app look as close to the example as possible. 
+You will need to use display:grid to make the bug reports display in three columns (see weeks 3 and 5).
+
+Extra credit: Once your app is working acceptably, refactor it to use modules instead of included files.
+/*/////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// var json = data.json
+
+const UserName = `Micah.Ross`; // User Name
+const ItemId = ``;
+var TDA = document.getElementById("Comments"); // To-Do-Area
+var TaskName = document.getElementById("TaskName");
+var TaskDescription = document.getElementById("TaskDescription");
+var TaskSubmit = document.getElementById("TaskSubmit"); // Get the submit button
+var TaskChecked = document.getElementById("TaskChecked"); // Get the submit button
+var API = `http://api.bryanuniversity.edu/${UserName}/list/${ItemId}`; // Build API on the fly
+
+function getSystems(){}
+function addBug(){}
+function reportBug(){}
+function resolveBug(){}
+function deleteBug(){}
+function populateDD(){}
+
+function fetchData()
+{
+    fetch(API) // Fetch data from SWAPI using variables from Fetchdata
+    .then(function (responce){return responce.json();}) // Change fetched string (x) to JSON (y)
+    .then(function (responce){updateInfo(responce)}) // Pass JSON to update function, which for some reason has to be a function...
+
+}
+function updateInfo(data)
+{
+    console.log(data);
+    
+    for (var i = 0; i < data.length; i++) // Loop all data
+        {
+        console.log(`ID is ${data[i]._id}`); // Log ID
+        fBuildDiv(data[i]); // Build a Division for data
+        }
+}
+
+function fBuildDiv(Data) // Build Division
+{
+    if(Data == '') // If your input is blank
+        {Data = `Error: Data not Found`;} // Write a log
+    console.log(`This is inside the Build Function: Name:${Data.name}, Description:${Data.description}, Price:${Data.price}, ID:${Data._id}, Complete:${Data.isComplete}`); // Log log, and check data
+
+    var eBool = Data.isComplete; // Get is completed
+
+    var eDiv = document.createElement("div"); // Make new division
+    eDiv.id = `${Data._id}-and-Division`; // Add a number to the division, in this case, database ID
+    eDiv.className = "ListBackground"; // Make the background look like paper
+
+    var eH3 = document.createElement("h3"); // Make H3 for the name of the item
+    eH3.id = `${Data._id}-and-H3`; // Add ID
+    eH3.textContent = `Reported by: ${Data.name}`; // We want the item name to be displayed
+
+    var eP = document.createElement("p"); // Make new paragraph
+    eP.id = `${Data._id}-and-P`; // Add ID
+    eP.textContent = Data.description; // We want the item description to be displayed
+
+    var eCheck = document.createElement("input"); // Make a finished checkbox
+    // eCheck.id = `${Data._id}-and-Check`; // Add ID
+    eCheck.id = `${Data._id}`; // Add ID
+    eCheck.type = "checkbox"; // Make it a checkbox...
+    eCheck.addEventListener("click", (e) => {fCheck(e.target)}); // Function for checking
+
+    var eButton = document.createElement("button"); // Make a delete button
+    eButton.id = `${Data._id}`; // Add ID
+    eButton.textContent = "Delete"; // Lable Button
+    eButton.addEventListener("click", (e) => {fDelete(e.target)}); // Function for Deleting
+
+    if(eBool){ // If marked as complete
+        eH3.style = "text-decoration: line-through;"; // Strike name
+        eP.style = "text-decoration: line-through;"; // Strike Description
+        eCheck.checked = eBool; // Mark completed
+    }
+    else{
+        eH3.style = "text-decoration: none;"; // Strike name
+        eP.style = "text-decoration: none;"; // Strike Description
+        eCheck.checked = eBool; // Mark completed
+    }
+
+    eDiv.appendChild(eH3); // append name to division
+    eDiv.appendChild(eP); // append description to division
+    eDiv.appendChild(eButton); // append button to division
+    eDiv.appendChild(eCheck); // append checkbox to division
+    TDA.appendChild(eDiv); // append division to comment section
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+// Javascript Go's Here
+
+const UserName = `Micah.Ross`; // User Name
+const ItemId = ``;
+var TDA = document.getElementById("Comments"); // To-Do-Area
+var TaskName = document.getElementById("TaskName");
+var TaskDescription = document.getElementById("TaskDescription");
+var TaskSubmit = document.getElementById("TaskSubmit"); // Get the submit button
+var TaskChecked = document.getElementById("TaskChecked"); // Get the submit button
+var API = `http://api.bryanuniversity.edu/${UserName}/list/${ItemId}`; // Build API on the fly
+
+const kPop = () => { // Make the function a const
+// I know function starts with an F, but I had to for the humor sake...
+// My wife gave me the idea.
+    // console.log(`tick`); // Check
+    axios.get(API) // Get that API
+    .then(function (responce){
+        for (var i = 0; i < responce.data.length; i++) // Loop all data
+        {
+        // console.log(`ID is ${responce.data[i]._id}`); // Log ID
+        fBuildDiv(responce.data[i]); // Build a Division for responces
+        }
+    })
+    .catch(error => console.log(`Error Responce: ${error}`)) // log any error
+}
+function fBuildDiv(ListData) // Build Division
+{
+    if(ListData == '') // If your input is blank
+        {ListData = `Error: Data not Found`;} // Write a log
+    // console.log(`This is inside the Build Function: ${ListData.name}, ${ListData.description}, ${ListData._id}, ${ListData.isComplete}`); // Log log, and check data
+
+    var eBool = ListData.isComplete; // Get is completed
+
+    var eDiv = document.createElement("div"); // Make new division
+    eDiv.id = `${ListData._id}-and-Division`; // Add a number to the division, in this case, database ID
+    eDiv.className = "ListBackground"; // Make the background look like paper
+
+    var eH3 = document.createElement("h3"); // Make H3 for the name of the item
+    eH3.id = `${ListData._id}-and-H3`; // Add ID
+    eH3.textContent = ListData.name; // We want the item name to be displayed
+
+    var eP = document.createElement("p"); // Make new paragraph
+    eP.id = `${ListData._id}-and-P`; // Add ID
+    eP.textContent = ListData.description; // We want the item description to be displayed
+
+    var eCheck = document.createElement("input"); // Make a finished checkbox
+    // eCheck.id = `${ListData._id}-and-Check`; // Add ID
+    eCheck.id = `${ListData._id}`; // Add ID
+    eCheck.type = "checkbox"; // Make it a checkbox...
+    eCheck.addEventListener("click", (e) => {fCheck(e.target)}); // Function for checking
+
+    var eButton = document.createElement("button"); // Make a delete button
+    eButton.id = `${ListData._id}`; // Add ID
+    eButton.textContent = "Delete"; // Lable Button
+    eButton.addEventListener("click", (e) => {fDelete(e.target)}); // Function for Deleting
+
+    if(eBool){ // If marked as complete
+        eH3.style = "text-decoration: line-through;"; // Strike name
+        eP.style = "text-decoration: line-through;"; // Strike Description
+        eCheck.checked = eBool; // Mark completed
+    }
+    else{
+        eH3.style = "text-decoration: none;"; // Strike name
+        eP.style = "text-decoration: none;"; // Strike Description
+        eCheck.checked = eBool; // Mark completed
+    }
+
+    eDiv.appendChild(eH3); // append name to division
+    eDiv.appendChild(eP); // append description to division
+    eDiv.appendChild(eButton); // append button to division
+    eDiv.appendChild(eCheck); // append checkbox to division
+    TDA.appendChild(eDiv); // append division to comment section
+}
+function fCheck(eEvent)
+{
+    var eH3 = document.getElementById(`${eEvent.id}-and-H3`); // Get the header
+    var eP = document.getElementById(`${eEvent.id}-and-P`); // Get the body
+
+    if(eEvent.checked){ // If marked as complete
+        eH3.style = "text-decoration: line-through;"; // Strike name
+        eP.style = "text-decoration: line-through;"; // Strike Description
+    }
+    else{
+        eH3.style = "text-decoration: none;"; // Strike name
+        eP.style = "text-decoration: none;"; // Strike Description
+    }
+
+    let data = { // Get data to update
+    isComplete: eEvent.checked // Update checkbox for is complete
+    };
+
+    fPut(data, eEvent.id);
+}
+function fDelete(eEvent)
+{
+    var sAPI = `http://api.bryanuniversity.edu/${UserName}/list/${eEvent.id}`;
+
+    axios.delete(sAPI) // Post data to sight
+    .then(function (responce){ // then get responce
+        console.log(responce); // Log ID
+    })
+    .catch(error => console.log(`Error Responce: ${error}`)) // log any error
+    
+    // Get all the parts of the list
+    var eDiv = document.getElementById(`${eEvent.id}-and-Division`);
+    var eH3 = document.getElementById(`${eEvent.id}-and-H3`);
+    // do you actualy read this? Or just use the page to check.
+    var eP = document.getElementById(`${eEvent.id}-and-P`);
+    var eButton = document.getElementById(`${eEvent.id}`);
+    //var eCheck = document.getElementById(`${eEvent.id}-and-Check`);
+    // And delete them
+    eDiv.remove();
+    eH3.remove();
+    eP.remove();
+    eButton.remove();
+    //eCheck.remove();
+    // and there dead bwa hahaha
+}
+function fPost(eEvent) // Post function
+{
+    let data = { // make data be data
+    name: TaskName.value, // name is the Header
+    description: TaskDescription.value, // Body is the description 
+    price: 0, // There is no price, this is for consistancy
+    isComplete: TaskChecked.checked // Complete checkbox for is complete
+    };
+    axios.post(API, data) // Post data to sight
+    .then(function (responce){ // then get responce
+        console.log(responce); // Log ID
+        fBuildDiv(responce.data); // Build a Division for responces
+    })
+    .catch(error => console.log(`Error Responce: ${error}`)) // log any error
+}
+function fPut(data, eEvent)
+{
+    var sAPI = `http://api.bryanuniversity.edu/${UserName}/list/${eEvent}`;
+
+    axios.put(sAPI, data) // Post data to sight
+    .then(function (responce){ // then get responce
+        console.log(responce); // Log ID
+    })
+    .catch(error => console.log(`Error Responce: ${error}`)) // log any error
+}
+
+
+kPop(); // lol, I'm so dumb
+*/
+       </script>    
+        <!-- <script src = "JavaScript.js"></script> <!-- Link Javascript -->
+    </body>
+</html>

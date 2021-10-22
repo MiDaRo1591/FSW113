@@ -1,0 +1,55 @@
+<!-- 
+    All of your changes for this project will be in other documents, but don't forget to 
+    link / include / import those documents into this document in the right places 
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Own Bug Tracker</title>
+        <link href = "style.css" rel = "stylesheet"/> <!-- Link Style Sheet -->
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id='reportWrapper' class='reportWrapper'>
+            <div id='topbar' class='topbar'><img src='./images/bug.png' alt='bug icon' style='height:20px; width:20px;' /> Report a New Bug</div>
+                <form id='bugForm' action='#' onsubmit='reportBug();' return false'>
+                    <div id='reporterByDiv'>
+                        <input class='userInput' placeholder='Reported By' type='text' id='reportedBy' style='width:97%' value='Micah Ross'/>
+                    </div>
+                    <div id='systemDiv'>
+                        <select id='system' class='userInput' style='width:100%'></select>
+                    </div>
+                    <div id='subSystemDiv'>
+                        <select id='subSystem' class='userInput' style='width:100%'></select>
+                    </div>
+                    <div id='bugDescrDiv'>
+                        <textarea id='bugDesc' class='userInput' style='width:98%' placeholder='Desribe the bug' ></textarea>
+                    </div>
+                    <div id='bttnDiv' style='text-align: right;'>
+                        <button type='reset' id='resetBtn' class='button'>Reset</button>
+                        <button type='submit' id='submitBtn' class='button' onsubmit='reportBug()'>Submit</button>
+                    </div>
+                </form>
+            </div>
+            <br />
+            <div id='listWrapper' class='listWrapper'>
+                <div id = 'ID' class='logError'>
+                    <h3 id = 'ID+H3'>Reported by: Micah Ross</h3>
+                    <p id = 'ID+P1'>System: Design / Coding</p>
+                    <p id = 'ID+P2'>Example of a problem that has been written out for the user to look at.</p>
+                </div>
+                <div id = 'ID' class='logFix'>
+                    <h3 id = 'ID+H3'>Reported by: Micah Ross</h3>
+                    <p id = 'ID+P1'>System: Design / Coding</p>
+                    <p id = 'ID+P2'>Example of a problem that has been written out and fixed.</p>
+                </div>
+            </div>
+        </div>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src = "./scripts/data.js"></script> <!-- Link Javascript -->
+        <script src = "./scripts/bug.js"></script> <!-- Link Javascript -->
+    </body>
+
+</html>

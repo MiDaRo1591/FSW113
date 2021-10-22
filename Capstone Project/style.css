@@ -1,0 +1,77 @@
+/* 
+    Create all the style definitions necessary to make your app look as close 
+    to the example as possible. You will need to use display:grid to make the 
+    bug reports display in three columns (see week 4).
+*/
+body{
+    background-image: url("./images/wallpaper.jpg");
+    background-repeat: repeat;
+}
+.reportWrapper
+{           
+    width: 300px;
+    font-size: 10px;
+    align-content: center;
+    margin: 0 auto;
+    padding: 10px;   
+    bottom: 10px;
+    border: 2px solid grey;
+    border-radius: 15px;
+}
+.topbar
+{           
+    font-size: 15px;
+    font-Weight: bold;
+    color: white;
+    background-color: red;
+    align-content: left;
+    margin: 0 auto;
+    padding: 5px;   
+    bottom: 5px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.userInput
+{
+    
+    padding: 5px;
+    color: black;
+    font-size: 12px;
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgb(150, 150, 150);
+    font-Weight: bold;
+}
+.button
+{
+    background-color: red;
+    color: white;
+}
+.listWrapper
+{
+    
+    width: 300px;
+    padding: 5px;   
+    border: 2px solid grey;
+    border-radius: 15px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto auto;
+}
+.logError
+{
+    background-color: rgb(150, 150, 150);
+    align-content: center; 
+    bottom: 10px;
+    border: 2px solid grey;
+    border-radius: 15px;
+}
+.logFix
+{
+    background-color: rgb(50, 50, 50);
+    align-content: center; 
+    bottom: 10px;
+    border: 2px solid rgb(150, 150, 150);
+    border-radius: 15px;
+}
